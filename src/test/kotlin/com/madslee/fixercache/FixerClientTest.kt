@@ -7,10 +7,8 @@ class FixerClientTest {
 
     @Test
     fun `get latest currency rates from base`() {
-        val accessKey = System.getenv("fixerAccessKey")
         val base = "EUR"
-
-        val currencyRateInformation = getLatestCurrencyRates(accessKey, base)
+        val currencyRateInformation = getLatestCurrencyRates(base)
         assertThat(currencyRateInformation).isNotNull
         assertThat(currencyRateInformation.rates).isNotEmpty
     }
