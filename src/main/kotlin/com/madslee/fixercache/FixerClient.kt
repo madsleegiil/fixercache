@@ -3,15 +3,20 @@ package com.madslee.fixercache
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import io.javalin.http.BadGatewayResponse
 import java.net.URL
 
 private val baseUrl = Environment.get("fixerBaseUrl")
 private val accessKey = Environment.get("fixerAccessKey")
 
 fun getLatestCurrencyRates(base: String): RateInformation {
-    val url = URL("$baseUrl$accessKey&format=1&base=$base")
-    val json = url.readText()
-    return objectMapper.readValue(json)
+    try {
+        val url = URL("$baseUrl$accessKey&format=1&base=$base")
+        val json = url.readText()
+        return objectMapper.readValue(json)
+    } catch (e: Exception) {
+        throw BadGatewayResponse("Error fetching rates from fixer.io for $base")
+    }
 }
 
 private val objectMapper = jacksonObjectMapper().apply {
