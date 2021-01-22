@@ -8,7 +8,7 @@ import java.net.URL
 private val baseUrl = Environment.get("fixerBaseUrl")
 private val accessKey = Environment.get("fixerAccessKey")
 
-fun getLatestCurrencyRates(base: String): CurrencyRateInformation {
+fun getLatestCurrencyRates(base: String): RateInformation {
     val url = URL("$baseUrl$accessKey&format=1&base=$base")
     val json = url.readText()
     return objectMapper.readValue(json)
