@@ -1,7 +1,6 @@
 package com.madslee.fixercache
 
 import org.slf4j.LoggerFactory
-import java.io.Serializable
 import java.time.LocalDateTime
 
 object CurrencyRateCache {
@@ -38,8 +37,3 @@ data class RateInformationTime(
     val dateTimeFetched: LocalDateTime,
     val rateInformation: RateInformation
 )
-
-data class RateInformation(
-    val base: String,
-    val rates: List<Map<String, Double>>
-) : Serializable

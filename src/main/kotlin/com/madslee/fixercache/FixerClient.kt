@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.javalin.http.BadGatewayResponse
+import java.io.Serializable
 import java.net.URL
 
 private val baseUrl = Environment.get("fixerBaseUrl")
@@ -24,3 +25,7 @@ private val objectMapper = jacksonObjectMapper().apply {
     configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 }
 
+data class RateInformation(
+    val base: String,
+    val rates: List<Map<String, Double>>
+) : Serializable
